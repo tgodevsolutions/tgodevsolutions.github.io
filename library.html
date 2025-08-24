@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Email Templates — Saved Templates & Folders</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Header / Nav -->
+    <header class="header">
+      <div class="app-title">Email Templates — Library</div>
+      <nav class="nav">
+        <a class="btn btn-outline" href="index.html">Home</a>
+        <a class="btn btn-outline" href="builder.html">Create Template</a>
+        <a class="btn btn-outline" href="library.html" aria-current="page">Saved Templates</a>
+      </nav>
+    </header>
+
+    <!-- Two-column layout: Folders (left) / Templates (right) -->
+    <main class="grid-2">
+      <!-- Folders panel -->
+      <section class="card">
+        <h2 class="section-title">Folders</h2>
+
+        <div class="toolbar">
+          <button id="addFolderBtn" class="btn btn-outline" type="button">Add Folder</button>
+          <button id="renameFolderBtn" class="btn btn-outline" type="button">Rename</button>
+          <button id="deleteFolderBtn" class="btn btn-danger" type="button">Delete</button>
+          <span class="right muted" id="folderHint">Select a folder to manage it</span>
+        </div>
+
+        <div class="space"></div>
+
+        <div class="list" id="folderList">
+          <!-- Populated by library.js -->
+          <!-- Row format:
+               <div class="list-item" data-id="...">
+                 <div>
+                   <div class="item-title">Folder name</div>
+                   <div class="item-sub">N templates</div>
+                 </div>
+               </div>
+          -->
+        </div>
+      </section>
+
+      <!-- Templates panel -->
+      <section class="card">
+        <h2 class="section-title">Templates</h2>
+
+        <div class="toolbar">
+          <a class="btn btn-primary" href="builder.html">New Template</a>
+          <input class="input right" id="searchInput" type="text" placeholder="Search templates by name..."
+       autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" />
+        </div>
+
+        <div class="space"></div>
+
+        <div id="templateList" class="list">
+          <!-- Populated by library.js -->
+          <!-- Row format:
+               <div class="list-item" data-id="...">
+                 <div>
+                   <div class="item-title">Template name</div>
+                   <div class="item-sub">Folder • Updated 2025-08-24</div>
+                 </div>
+                 <div class="row">
+                   <button class="btn btn-outline btn-small" data-action="edit">Edit</button>
+                   <button class="btn btn-outline btn-small" data-action="move">Move</button>
+                   <button class="btn btn-danger btn-small" data-action="delete">Delete</button>
+                 </div>
+               </div>
+          -->
+        </div>
+
+        <div id="templatesEmpty" class="empty hidden">
+          No templates found for this view.
+        </div>
+      </section>
+    </main>
+
+    <div class="space"></div>
+
+    <!-- Inline Editor (appears below lists when editing a template) -->
+    <section id="editorCard" class="card hidden" aria-live="polite">
+      <h2 class="section-title">Edit Template</h2>
+
+      <div class="grid-3">
+        <div class="field">
+          <label class="label" for="editName">Template name</label>
+         <input class="input" id="editName" type="text"
+       autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" />
+        </div>
+
+        <div class="field">
+          <label class="label" for="editFolder">Folder</label>
+          <select class="select" id="editFolder">
+            <!-- Populated by library.js -->
+            <option value="">— No folder —</option>
+          </select>
+          <div class="helper">Change the folder location.</div>
+        </div>
+
+        <div class="field">
+          <label class="label">Info</label>
+          <div class="badge" id="editMeta">—</div>
+          <div class="helper">Created / Updated timestamps</div>
+        </div>
+      </div>
+
+      <div class="space"></div>
+
+      <div class="field">
+        <label class="label" for="editBody">Template content</label>
+        <textarea class="textarea" id="editBody" placeholder="Edit the template text here..."
+          autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false"></textarea>
+        <div class="helper">
+          Placeholders: {{first_name}}, {{spoke_to}}, {{company_name}}, {{competitor}}, {{date_1}}, {{date_2}}.
+          Dates may use filters like <code>|longdate</code> or <code>|shortdate</code>.
+        </div>
+      </div>
+
+      <div class="space"></div>
+
+      <div class="toolbar">
+        <button id="cancelEditBtn" class="btn btn-outline" type="button">Cancel</button>
+        <button id="saveEditBtn" class="btn btn-primary" type="button">Save Changes</button>
+        <button id="deleteEditBtn" class="btn btn-danger right" type="button">Delete Template</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Scripts -->
+  <script src="core.js"></script>
+  <script src="library.js"></script>
+</body>
+</html>
